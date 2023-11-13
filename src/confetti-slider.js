@@ -2,26 +2,24 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Slider from "@mui/material/Slider";
-import Confetti from "./confetti";
-import confetti from "https://cdn.skypack.dev/canvas-confetti";
 
-export default function ConfettiSlider() {
+export default function ConfettiSlider({ myConfetti }) {
   const [value, setValue] = React.useState(30);
 
-  if (value == 100) {
+  if (value === 100) {
     var duration = 10 * 1000;
     var end = Date.now() + duration;
 
     (function frame() {
       // launch a few confetti from the left edge
-      confetti({
+      myConfetti({
         particleCount: 15,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
       });
       // and launch a few from the right edge
-      confetti({
+      myConfetti({
         particleCount: 15,
         angle: 120,
         spread: 55,
@@ -37,7 +35,7 @@ export default function ConfettiSlider() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    confetti({
+    myConfetti({
       particleCount: value < 50 ? value : 500,
       startVelocity: value * 0.5,
       spread: value * 3.6,
